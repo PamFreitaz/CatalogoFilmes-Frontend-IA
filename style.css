@@ -1,0 +1,280 @@
+/* Reset básico para todos os elementos */
+* {
+    box-sizing: border-box; /* Inclui padding e border na largura total do elemento */
+}
+
+/* Variáveis de cor que podem ser reaproveitadas */
+:root {
+    --bg: #141414; /* Fundo escuro padrão da Netflix */
+    --surface: #1f1f1f; /* Fundo dos cards */
+    --muted: #e5e5e5;
+    --white: #fff;
+    --red: #e50914; /* Vermelho da marca Netflix */
+    --gray6: #757575;
+    --roxo: #470347;
+}
+
+/* Modo claro */
+.light-mode {
+    --bg: #ffffff; /* Fundo claro */
+    --surface: #f8f8f8; /* Fundo dos cards claro */
+    --muted: #333333; /* Texto escuro */
+    --white: #000000; /* Texto preto */
+    --red: #e50914; /* Mantém o vermelho */
+    --gray6: #757575;
+    --roxo: #470347;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: none;
+    color: var(--white);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    color: var(--white);
+    display: flex; /* Centraliza o main no eixo X */
+    justify-content: center;
+    align-items: center; /* Centraliza no eixo Y */
+    min-height: 100vh;
+    text-rendering: optimizeLegibility; /* Texto mais legível */
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.75)),
+                url('assets/fundo.jpg') no-repeat center center / cover;
+    filter: saturate(0.85) blur(0.35px);
+    opacity: 1;
+    z-index: -1;
+}
+
+body.light-mode::before {
+    background: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)),
+                url('assets/fundo.jpg') no-repeat center center / cover;
+    filter: saturate(0.95) blur(0.35px);
+    opacity: 1;
+}
+
+body.dark-mode::before {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+                url('assets/fundo.jpg') no-repeat center center / cover;
+    filter: saturate(0.7) blur(0.35px);
+    opacity: 1;
+}
+
+body.light-mode {
+    background-color: rgba(255, 255, 255, 0.55);
+    color: var(--muted);
+}
+
+main {
+    width: min(95vw, 900px); /* Limita largura do conteúdo */
+    padding: 2rem 1rem 3rem;
+    background: linear-gradient(180deg, rgba(20,20,20,0.96), rgba(16,16,16,0.72));
+    border: 1px solid rgba(255,255,255,0.08); /* Borda sutil */
+    border-radius: 12px; /* Cantos arredondados */
+    box-shadow: 0 18px 48px rgba(0,0,0,0.6); /* Sombra profunda */
+}
+
+.light-mode main {
+    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,250,250,0.72));
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 18px 48px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    font-size: clamp(1.8rem, 2.5vw, 2.8rem); /* Ajusta tamanho de fonte responsivo */
+    margin: 0 0 1.6rem; /* Espaçamento inferior */
+    text-align: center; /* Centraliza texto */
+    font-weight: 700; /* Negrito */
+    color: var(--white); /* Branco */
+    text-shadow: 0 2px 8px rgba(0,0,0,0.45); /* Sombra no texto */
+}
+
+.light-mode header h1 {
+    color: var(--muted); /* Texto escuro no modo claro */
+    text-shadow: 0 2px 8px rgba(255,255,255,0.45); /* Sombra clara */
+}
+
+header {
+    position: relative; /* Para posicionar o botão */
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--white);
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    transition: color 0.2s ease;
+}
+
+.light-mode #theme-toggle {
+    color: var(--muted);
+}
+
+.profiles {
+    margin: 0; /* Remove margens extras */
+}
+
+.profile-selection {
+    background: var(--surface); /* Fundo dos perfis */
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08); /* Borda interna leve */
+}
+
+.profile-nav {
+    display: grid; /* Grid responsivo de cards */
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); /* Colunas adaptáveis */
+    gap: 1rem; /* Espaço entre cards */
+    list-style: none; /* Remove marcadores de lista */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove padding padrão */
+}
+
+.profile-link {
+    background: rgba(0,0,0,0.35); /* Fundo leve escuro */
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Suaviza transformações */
+    list-style: none; /* Remove marcadores de lista */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove padding padrão */
+}
+
+.light-mode .profile-link {
+    background: rgba(255,255,255,0.8); /* Fundo leve claro */
+}
+
+.profile-link a {
+    display: block; /* Link ocupa todo o card */
+    color: inherit; /* Mantém cor do texto */
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.profile-link:hover {
+    transform: scale(1.03); /* Leve zoom ao passar o mouse */
+}
+
+.profile-link:focus-within {
+    transform: scale(1.03); /* Também aplica foco para teclado */
+    box-shadow: 0 14px 30px rgba(0,0,0,0.45); /* Sombra destacada */
+    outline: 2px solid var(--roxo); /* Contorno vermelho para acessibilidade */
+    outline-offset: 2px;
+}
+
+figure {
+    margin: 0; /* Remove margens padrão */
+    position: relative;
+    display: block; /* Modo padrão: organiza conteúdo em bloco (fluxo natural) */
+}
+
+figure img {
+    width: 100%; /* Imagem ocupa todo o card */
+    height: auto; /* Mantém proporção */
+    display: block; /* Garante que figura ocupe largura inteira e não deixe espaço em linha */
+    border-radius: 8px; /* Cantos arredondados na imagem */
+    border-bottom-left-radius: 0; /* Não arredonda base porque figcaption abaixo */
+    border-bottom-right-radius: 0;
+}
+
+figcaption {
+    color: var(--white); /* Texto branco */
+    background: rgba(0,0,0,0.35); /* Fundo leve translúcido */
+    padding: 0.75rem 0.8rem; /* Espaçamento interno */
+    text-align: center; /* Centraliza texto */
+    font-size: 1rem;
+    font-weight: 600;
+    border-bottom-left-radius: 8px; /* Cantos arredondados na base */
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    margin-top: 0.35rem; /* Espaçamento entre imagem e legenda */
+}
+
+.light-mode figcaption {
+    color: var(--muted); /* Texto escuro */
+    background: rgba(0,0,0,0.1); /* Fundo leve translúcido claro */
+}
+
+.profile-link img:hover {
+    border: 2px solid #470347; /* Contorno vermelho ao passar mouse */
+    box-shadow: 0 0 10px 1px #470347; /* Brilho vermelho */
+}
+
+figcaption {
+    color: var(--white); /* Texto branco */
+    background: rgba(0,0,0,0.35); /* Fundo leve translúcido */
+    padding: 0.75rem 0.8rem; /* Espaçamento interno */
+    text-align: center; /* Centraliza texto */
+    font-size: 1rem;
+    font-weight: 600;
+    border-bottom-left-radius: 8px; /* Cantos arredondados na base */
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+@media (max-width: 520px) {
+    main {
+        padding: 1rem 0.6rem 2rem; /* Ajusta padding para pequenas telas */
+    }
+    figcaption {
+        font-size: 0.95rem; /* Tamanho de fonte menor em mobile */
+    }
+    .profile-nav {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Menos colunas em telas pequenas */
+        gap: 0.8rem; /* Espaço menor entre cards */
+    }
+}
+
+/* Responsividade para tablets (481px a 768px) */
+@media (min-width: 521px) and (max-width: 768px) {
+    main {
+        width: min(90vw, 800px); /* Largura ajustada para tablets */
+        padding: 1.5rem 1rem 2.5rem;
+    }
+    header h1 {
+        font-size: clamp(2rem, 3vw, 2.5rem); /* Fonte um pouco maior para tablets */
+    }
+    .profile-nav {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Colunas médias para tablets */
+        gap: 1rem;
+    }
+    figcaption {
+        font-size: 0.9rem; /* Fonte menor para tablets */
+        padding: 0.6rem 0.7rem;
+    }
+}
+
+/* Responsividade para desktops e telas grandes (769px+) */
+@media (min-width: 769px) {
+    main {
+        width: min(95vw, 1200px); /* Largura maior para desktops */
+        padding: 2.5rem 1.5rem 3.5rem;
+    }
+    header h1 {
+        font-size: clamp(2.5rem, 4vw, 3.5rem); /* Fonte maior para desktops */
+    }
+    .profile-nav {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Mais colunas para telas grandes */
+        gap: 1.2rem;
+    }
+    figcaption {
+        font-size: 1.1rem; /* Fonte maior para desktops */
+        padding: 0.8rem 0.9rem;
+    }
+}

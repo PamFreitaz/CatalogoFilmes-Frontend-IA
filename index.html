@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Quem está assistindo?</h1>
+            <button id="theme-toggle" aria-label="Alternar entre modo escuro e claro">🌙</button>
+        </header>
+        <section class="profiles">
+            <section class="profile-selection">
+                <ul class="profile-nav">
+                    <li class="profile-link">
+                        <a href="catalogo/catalogo.html" onclick="selectProfile('Pam', 'assets/perfil1.png')">
+                            <figure>
+                                <img src="assets/perfil1.png" alt="Perfil da Pâmela">
+                                <figcaption>Pam</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="profile-link">
+                        <a href="catalogo/catalogo.html" onclick="selectProfile('Dani', 'assets/perfil2.png')">
+                            <figure>
+                                <img src="assets/perfil2.png" alt="Perfil da Daniele">
+                                <figcaption>Dani</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="profile-link">
+                        <a href="catalogo/catalogo.html" onclick="selectProfile('Daniela', 'assets/perfil3.png')">
+                            <figure>
+                                <img src="assets/perfil3.png" alt="Perfil da Daniela">
+                                <figcaption>Daniela</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="profile-link">
+                        <a href="catalogo/catalogo.html" onclick="selectProfile('Marta', 'assets/perfil4.png')">
+                            <figure>
+                                <img src="assets/perfil4.png" alt="Perfil da Marta">
+                                <figcaption>Marta</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </section>    
+    </main>
+    <script src="script.js"></script>
+    <script>
+        function selectProfile(name, image) {
+            localStorage.setItem('perfilAtivoNome', name);
+            localStorage.setItem('perfilAtivoImagem', image);
+            window.location.href = 'catalogo/catalogo.html';
+        }
+    </script>
+</body>
+</html>
